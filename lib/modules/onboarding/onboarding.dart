@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:shop/generated/locale_keys.g.dart';
 import 'package:shop/modules/log_in_screen/log_screen.dart';
+import 'package:shop/shared/components/push_replacement.dart';
+import 'package:shop/shared/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class BoardingModel{
   final String image;
@@ -27,15 +31,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   PageController boardingController = PageController();
 
   List<BoardingModel> boarding = [
-    BoardingModel(image: 'assets/images/onBoarding.png',
-      title: 'Hello title 01',
-      body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',),
-    BoardingModel(image: 'assets/images/onBoarding.png',
-      title: 'Hello title 02',
-      body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',),
-    BoardingModel(image: 'assets/images/onBoarding.png',
-      title: 'Hello title 03',
-      body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',),
+    BoardingModel(image: 'assets/images/avoid-scam.png',
+      title: LocaleKeys.onBoardingtitle01.tr(),
+      body: LocaleKeys.onBoardingmessage01.tr(),),
+    BoardingModel(image: 'assets/images/be-in-control.png',
+      title: LocaleKeys.onBoardingtitle02.tr(),
+      body: LocaleKeys.onBoardingmessage02.tr(),),
+    BoardingModel(image: 'assets/images/top-rated.png',
+      title: LocaleKeys.onBoardingtitle03.tr(),
+      body: LocaleKeys.onBoardingmessage03.tr(),),
   ];
 
   @override
@@ -87,12 +91,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   ),
                   Spacer(),
                   TextButton(onPressed: () {
-                    Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LogInScreen()),
-                        );
-                      }, child: Text('SKIP')),
+                    CacheHelper.saveData(key: 'onBoarding', value: true);
+                   navigatorPR(context: context, page: LogInScreen());
+                      }, child: Text(LocaleKeys.skipbutton.tr())),
                 ],
               ),
             )
@@ -105,6 +106,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget onBoardingScreenItem(context, model, int i) {
     return Column(
       children: [
+        SizedBox(
+          height: 30.0,
+        ),
         Expanded(
           child: Image(
             image: AssetImage(
@@ -117,7 +121,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
         Text(
           model.title,
-          style: Theme.of(context).textTheme.headline6,
+          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10.0,
@@ -125,7 +129,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         Expanded(
           child: Text(
             model.body,
-            style: Theme.of(context).textTheme.bodyText1,
+            style: TextStyle(fontSize: 14.0),
             maxLines: 6,
             overflow: TextOverflow.ellipsis,
           ),

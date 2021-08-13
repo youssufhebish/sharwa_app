@@ -31,10 +31,25 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  dio: ^4.0.0
+  conditional_builder: ^1.0.2
+  fluttertoast: ^8.0.7
+  shared_preferences: ^2.0.6
+  salomon_bottom_bar: ^3.1.0
+  carousel_slider: ^4.0.0
+  search_app_bar: ^1.0.2+2
+  easy_localization:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  flutter_launcher_icons: "^0.9.1"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -50,6 +65,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/translations/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -64,13 +81,16 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: LibreBaskerville
+    - family: NotoSansTC
       fonts:
-        - asset: assets/fonts/LibreBaskerville-Regular.ttf
-        - asset: assets/fonts/LibreBaskerville-Bold.ttf
+        - asset: assets/fonts/NotoSansTC-Regular.otf
+        - asset: assets/fonts/NotoSansTC-Bold.otf
           weight: 700
-        - asset: assets/fonts/LibreBaskerville-Italic.ttf
-          style: italic
+    - family: Changa
+      fonts:
+        - asset: assets/fonts/Changa-Regular.ttf
+        - asset: assets/fonts/Changa-Bold.ttf
+          weight: 700
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

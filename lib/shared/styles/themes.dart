@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:shop/Provider/app_cubit.dart';
+import 'package:shop/shared/network/local/cache_helper.dart';
+
+import 'colors.dart';
 
 ThemeData lightTheme = ThemeData(
   scaffoldBackgroundColor: Colors.white,
   backgroundColor: Colors.white,
-  primarySwatch: Colors.pink,
+  primarySwatch: primaryColor,
   appBarTheme: AppBarTheme(
+    iconTheme: IconThemeData(
+      color: primaryColor,
+    ),
+    color: Colors.white,
     elevation: 0.0,
   ),
-
+  fontFamily: 'Changa',
   textTheme: TextTheme(
     headline6: TextStyle(
       fontWeight: FontWeight.w700,
@@ -29,9 +37,12 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: Colors.black,
   primarySwatch: Colors.pink,
   appBarTheme: AppBarTheme(
+    iconTheme: IconThemeData(
+      color: primaryColor,
+    ),
+    color: Colors.black,
     elevation: 0.0,
   ),
-  // fontFamily: 'LibreBaskerville',
   textTheme: TextTheme(
     headline6: TextStyle(
       fontWeight: FontWeight.w700,
