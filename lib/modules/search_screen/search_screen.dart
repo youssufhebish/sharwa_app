@@ -8,17 +8,14 @@ import 'package:shop/shared/components/favourite_item.dart';
 import 'package:shop/shared/styles/colors.dart';
 
 class SearchScreen extends StatefulWidget {
-  final bool clear;
 
-  const SearchScreen(this.clear);
   @override
-  _SearchScreenState createState() => _SearchScreenState(clear);
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool isSearching = false;
-  bool clear;
-  _SearchScreenState(this.clear);
+  _SearchScreenState();
+  bool base = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +23,11 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: isSearching? TextField(
+        title: TextField(
           style: TextStyle(color: primaryColor),
           onSubmitted: (string){
             AppCubit.get(context).search(string);
+            base = false;
           },
           decoration: InputDecoration(
             hintText: LocaleKeys.searchhere.tr().toUpperCase(),
@@ -41,22 +39,11 @@ class _SearchScreenState extends State<SearchScreen> {
             errorBorder: InputBorder.none,
             disabledBorder: InputBorder.none,
           ),
-        ): Text(''),
-        actions: [
-          IconButton(icon: Icon(isSearching? Icons.cancel : Icons.search), onPressed: (){
-            setState((){
-              isSearching = !isSearching;
-              clear = true;
-            });
-          })
-        ],
+        ),
       ),
-      body: ConditionalBuilder(
+      body: base? Container() : ConditionalBuilder(
         condition: AppCubit.get(context).state is! SearchLoadingState,
-        builder: (context) => !clear ||
-                  AppCubit.get(context).state is! SearchSuccessState
-              ? Container()
-              : Padding(
+        builder: (context) => Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 5.0,
                   ),
@@ -77,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
-      )
+      ),
     );
   }
 }

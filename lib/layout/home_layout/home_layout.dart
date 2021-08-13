@@ -42,7 +42,7 @@ class HomeLayOut extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SearchScreen(false)),
+                        MaterialPageRoute(builder: (context) => SearchScreen()),
                       );
                     }),
               ],
